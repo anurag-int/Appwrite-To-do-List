@@ -1,21 +1,18 @@
 import React, {useState} from 'react'
-import account from "../appwrite/appwrite"
-import { useNavigate } from 'react-router-dom';
+import {account} from '../appwrite/appwrite'
+import {useNavigate} from 'react-router-dom'
 import {v4 as uuidv4} from 'uuid'
 
-const Signup = () => {
-
-    const navigate = useNavigate();
+function Signup() {
+    const navigate = useNavigate()
     const [user, setUser] = useState({
-        name : "",
-        email : "",
-        password : ""
+        name: "",
+        email: "",
+        password: ""
     })
 
-    console.log(user);
-
-    //Signup
-    const signupUser = async(e) => {
+    //Signup 
+    const signupUser = async (e) => {
         e.preventDefault()
 
         const promise = account.create(
@@ -23,20 +20,20 @@ const Signup = () => {
             user.email,
             user.password,
             user.name
-        )
+        );
 
         promise.then(
             function(response){
                 console.log(response);
-                navigate("/profile") // success
+                navigate("/profile") //success
             },
-            function(error){
-                console.log(error);
+            function(error) {
+                console.log(error); // Failure
             }
-            
         )
-    }
 
+
+    }
 
   return (
     <>
@@ -123,7 +120,7 @@ const Signup = () => {
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={signupUser}
                 >
-                  Sign Up
+                  Sign up
                 </button>
               </div>
             </form>
